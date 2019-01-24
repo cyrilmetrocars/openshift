@@ -1,0 +1,30 @@
+@keyframes colorchange {
+	from { background-color: white; }
+	to { background-color: yellow; }
+}
+
+h1 {
+	font-variant: small-caps;
+}
+
+.jumbotron {
+	margin: 4rem 1rem 1rem 1rem;
+}
+
+#search {
+	animation: colorchange 1s 6 alternate;
+}
+/*
+input#search:hover {
+	animation: colorchange 1s 6 alternate !important;
+}
+*/
+p::first-letter {
+	font-weight: bold;
+	color: red;
+}
+
+main .row>div.col-md-4>h2 {
+	text-transform: uppercase;
+	text-decoration: underline;
+}
