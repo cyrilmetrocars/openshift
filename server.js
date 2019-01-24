@@ -74,7 +74,7 @@ var initDb = function(callback) {
   });
 };
 
-app.get('/views/', function (req, res) {
+app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
   if (!db) {
@@ -88,11 +88,15 @@ app.get('/views/', function (req, res) {
       if (err) {
         console.log('Error running count. Message:\n'+err);
       }
-      res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
+      res.render('readme.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
-    res.render('index.html', { pageCountMessage : null});
+    res.render('readme.html', { pageCountMessage : null});
   }
+});
+
+app.get('/views/', function (req, res) {
+    res.render('index.html');
 });
 
 app.get('/pagecount', function (req, res) {
