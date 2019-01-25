@@ -119,10 +119,6 @@ app.get('/views/', function (req, res) {
 
 app.get('/all-cars/', function (req, res) {
 
-  //params
-  // var idBrand = req.swagger.params['idBrand'].value;
-  // var dirty = req.swagger.params['dirty'].value;
-
   //CORS
   res.setHeader('Access-Control-Allow-Origin','*');
   res.setHeader('Access-Control-Allow-Methods','GET, POST, DELETE, PUT, PATCH, OPTIONS');
@@ -139,6 +135,30 @@ app.get('/all-cars/', function (req, res) {
     _carsCollection.find().toArray(function(err,cars){
       var jsonCars = JSON.stringify(cars.map(function(car){delete car._id;return car;}));
       res.end(jsonCars);
+    });
+  } else {
+    res.end([]);
+  }
+});
+
+app.get('/all-brands/', function (req, res) {
+
+  //CORS
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET, POST, DELETE, PUT, PATCH, OPTIONS');
+  res.setHeader('Content-Type','application/json');
+  res.setHeader('Access-Control-Allow-Credentials','true');
+
+  //reponse
+  if (!db) {
+    initDb(function(err){console.log(err.message);});
+  }
+  if (db) {
+    var _collection = db.collection('brands');
+
+    _collection.find().toArray(function(err,brands){
+      var jsonBrands = JSON.stringify(brands.map(function(brand){delete brand._id;return brand;}));
+      res.end(jsonBrands);
     });
   } else {
     res.end([]);

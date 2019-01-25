@@ -20,7 +20,8 @@ Boolean.prototype.toNumber = function() {
 // console.log([1,2,"toto"].toString());
 // alert( 'tableau : ' + [1,2,"toto"]);
 
-var WS = 'http://localhost:3000';
+//var WS = 'http://localhost:3000';
+var WS = '';
 var Config = {};
 Config.getWsUrl = function(resource,settings){
 	"use strict";

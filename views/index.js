@@ -135,8 +135,8 @@ function loadDirty(ev){
 	Promise.all(
 		[
 			$.get('dirty-view.html')
-			, $.get(Config.getWsUrl('cars',{dirty:true}))
-			, $.get(Config.getWsUrl('brands'))
+			, $.get(Config.getWsUrl('all-cars',{dirty:true}))
+			, $.get(Config.getWsUrl('all-brands'))
 		]
 	).then(
 		function(responses){

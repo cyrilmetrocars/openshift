@@ -16,7 +16,8 @@ Boolean.prototype.toNumber = function() {
 	else { return 0;}
 };
 
-const WS = 'http://localhost:3000';
+//const WS = 'http://localhost:3000';
+const WS = '';
 var Config = {};
 Config.getWsUrl = (resource,settings) => {
 	var _url = WS + '/' + resource;
