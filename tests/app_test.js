@@ -15,42 +15,33 @@ describe('Basic routes tests', function() {
         .end(function(err, res) {
             res.should.have.status(200);
             done();
-        });
-    });
-
-    it('GET to /pagecount should return 200', function(done){
-        chai.request(reqServer)
-        .get('/pagecount')
-        .end(function(err, res) {
-            res.should.have.status(200);
-            done();
-        });
+        })
     });
     
     it('GET to /views should return 200', function(done){
         chai.request(reqServer)
-        .get('/views/')
+        .get('/views')
         .end(function(err, res) {
             res.should.have.status(200);
             done();
-        });
+        })
     });
 
     it('GET to /all-cars should return 200', function(done){
         chai.request(reqServer)
-        .get('/all-cars/')
+        .get('/all-cars')
         .end(function(err, res) {
             res.should.have.status(200);
             done();
-        });
+        })
     });
 
     it('GET to /all-brands should return 200', function(done){
         chai.request(reqServer)
-        .get('/all-brands/')
+        .get('/all-brands')
         .end(function(err, res) {
             res.should.have.status(200);
             done();
-        });
+        })
     });
-})
+});
