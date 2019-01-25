@@ -95,9 +95,7 @@ function loadByBrand(ev){
 function menuBrands(){
 	"use strict";
 
-	//pour les besoins du Clouding en attendant le dev de la resource "brands"
-//	$.get(Config.getWsUrl('brands'),function(brands){
-		brands = BRANDS;
+	$.get(Config.getWsUrl('all-brands'),function(brands){
 		
 		//marques triées
 		var _brands = brands
@@ -126,7 +124,7 @@ function menuBrands(){
 		//gestion du click sur les brands
 		$('#menu .brand').click( loadByBrand);
 
-//	});//clouding
+	});
 }
 //avec PROMISE
 function loadDirty(ev){
