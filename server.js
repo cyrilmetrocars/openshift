@@ -117,6 +117,11 @@ app.get('/views/', function (req, res) {
     res.render('index.html');
 });
 
+//correction pour favicon.ico à la racine du site
+app.get('/favicon.ico', function (req, res) {
+    res.render('favicon.ico');
+});
+
 app.get('/all-cars/', function (req, res) {
 
   //CORS
