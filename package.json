@@ -1,7 +1,7 @@
 {
   "name": "nodejs-ex",
   "version": "0.0.1",
-  "description": "MetroCars WebServices and GUI for OpenShift 3",
+  "description": "Node.js sample app for OpenShift 3",
   "main": "server.js",
   "dependencies": {
     "chai": "^3.5.0",
@@ -11,31 +11,24 @@
     "mocha": "^2.4.5",
     "mongodb": "^2.1.16",
     "morgan": "^1.7.0",
-    "object-assign":"4.1.0",
-    "connect": "^3.2.0",
-    "js-yaml": "^3.3.0",
-    "swagger-tools": "0.10.1"
+    "object-assign":"4.1.0"
   },
   "engine": {
     "node": "*",
     "npm": "*"
   },
-  "keywords": [
-    "swagger,metrocars,webstore"
-  ],
   "scripts": {
-    "prestart": "npm install",
     "start": "node server.js",
     "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cyrilmetrocars/openshift.git"
+    "url": "http://github.com/sclorg/nodejs-ex.git"
   },
-  "author": "Cyril BALL <cyril.ball@gmail.com>",
+  "author": "Steve Speicher <sspeiche@gmail.com>",
   "license": "CC-BY-1.0",
   "bugs": {
     "url": "http://github.com/sclorg/nodejs-ex/issues"
   },
-  "homepage": "https://github.com/cyrilmetrocars/openshift"
+  "homepage": "http://github.com/sclorg/nodejs-ex"
 }
