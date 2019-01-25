@@ -113,7 +113,7 @@ app.get('/pagecount', function (req, res) {
 });
 
 
-app.get('/views/', function (req, res) {
+app.get('/views', function (req, res) {
     res.render('index.html');
 });
 
@@ -122,7 +122,7 @@ app.get('/favicon.ico', function (req, res) {
     res.render('favicon.ico');
 });
 
-app.get('/all-cars/', function (req, res) {
+app.get('/all-cars', function (req, res) {
 
   //CORS
   res.setHeader('Access-Control-Allow-Origin','*');
@@ -146,7 +146,7 @@ app.get('/all-cars/', function (req, res) {
   }
 });
 
-app.get('/all-brands/', function (req, res) {
+app.get('/all-brands', function (req, res) {
 
   //CORS
   res.setHeader('Access-Control-Allow-Origin','*');
