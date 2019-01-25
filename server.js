@@ -1,3 +1,6 @@
+var utils = require('../utils/writer.js');
+var Car = require('../service/CarService');
+
 //  OpenShift sample Node application
 var express = require('express'),
     app     = express(),
@@ -14,6 +17,8 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
+	
+	
 if (mongoURL == null) {
   var mongoHost, mongoPort, mongoDatabase, mongoPassword, mongoUser;
   // If using plane old env vars via service discovery
@@ -95,10 +100,6 @@ app.get('/', function (req, res) {
   }
 });
 
-app.get('/views/', function (req, res) {
-    res.render('index.html');
-});
-
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
@@ -112,6 +113,46 @@ app.get('/pagecount', function (req, res) {
   } else {
     res.send('{ pageCount: -1 }');
   }
+});
+
+
+app.get('/views/', function (req, res) {
+    res.render('index.html');
+});
+
+app.get('/all-cars/', function (req, res) {
+
+  //params
+  // var idBrand = req.swagger.params['idBrand'].value;
+  // var dirty = req.swagger.params['dirty'].value;
+
+  //CORS
+  res.setHeader('Access-Control-Allow-Origin','*');
+  res.setHeader('Access-Control-Allow-Methods','GET, POST, DELETE, PUT, PATCH, OPTIONS');
+  res.setHeader('Content-Type','application/json');
+  res.setHeader('Access-Control-Allow-Credentials','true');
+
+  //reponse
+//  Car.getCars(idBrand,dirty)
+  Car.getCars()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+
+  // if (!db) {
+  //   initDb(function(err){console.log(err.message);});
+  // }
+  // if (db) {
+  //   var cars = db.collection('cars');
+  //   var jsonCars = JSON.stringify(cars.map(function(car){delete car._id;return car;}));
+
+  //     res.render('readme.html', { pageCountMessage : count, dbInfo: dbDetails });
+  // } else {
+  //   res.render('readme.html', { pageCountMessage : null});
+  // }
 });
 
 // error handling

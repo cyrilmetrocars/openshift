@@ -1,0 +1,221 @@
+---
+swagger: "2.0"
+info:
+  description: "MetroCars WebServices"
+  version: "1"
+  title: "MetroCars Webstore"
+  contact:
+    email: "ball_cyril@hotmail.com"
+host: "127.0.0.1:8081"
+tags:
+- name: "car"
+  description: "Tout sur les voitures"
+- name: "brand"
+  description: "Les marques"
+- name: "order"
+  description: "Les commandes"
+schemes:
+- "http"
+paths:
+  /cars:
+    get:
+      tags:
+      - "car"
+      summary: "Trouver des voitures"
+      description: "Nombreux queryParams : _limit, _page, name_like, idBrand, dirty"
+      operationId: "getCars"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "idBrand"
+        in: "query"
+        description: "L'ID de la marque des voitures à récupérer"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "dirty"
+        in: "query"
+        description: "Le booléen qui précise si on s'intéresse aux dirty cars uniquement"
+        required: false
+        type: "boolean"
+      responses:
+        200:
+          description: "Opération réussie"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Car"
+        500:
+          description: "Erreur de NodeJS"
+      x-swagger-router-controller: "Car"
+    post:
+      tags:
+      - "car"
+      summary: "Ajouter une voiture"
+      description: "Ajouter une voiture sans ID la voiture revient avec son ID"
+      operationId: "postCar"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "La voiture à ajouter sans ID"
+        required: true
+        schema:
+          $ref: "#/definitions/Car"
+      responses:
+        201:
+          description: "Voiture créée !"
+          schema:
+            $ref: "#/definitions/Car"
+        405:
+          description: "Saisie invalide"
+      x-swagger-router-controller: "Car"
+  /cars/{id}:
+    get:
+      tags:
+      - "car"
+      summary: "Trouver une voiture"
+      description: "Trouver une voiture par son ID"
+      operationId: "getCar"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Le ID de la voiture à trouver"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Voiture trouvée"
+          schema:
+            $ref: "#/definitions/Car"
+        400:
+          description: "Mauvais ID fournit !"
+        404:
+          description: "Voiture non trouvée"
+        500:
+          description: "Erreur de NodeJS"
+      x-swagger-router-controller: "Car"
+    put:
+      tags:
+      - "car"
+      summary: "Ecraser une voiture"
+      description: "Ecraser toutes les données d'une voiture"
+      operationId: "putCar"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "La voiture à écraser"
+        required: true
+        schema:
+          $ref: "#/definitions/Car"
+      - name: "id"
+        in: "path"
+        description: "Le ID de la voiture à écraser"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        201:
+          description: "Voiture créée !"
+          schema:
+            $ref: "#/definitions/Car"
+        400:
+          description: "Le ID n'est pas bon"
+        404:
+          description: "Voiture non trouvée !"
+        405:
+          description: "Données non valides"
+      x-swagger-router-controller: "Car"
+    delete:
+      tags:
+      - "car"
+      summary: "Supprimer une voiture"
+      description: "Supprimer une voiture par son ID"
+      operationId: "deleteCar"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Le ID de la voiture à supprimer"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        202:
+          description: "Voiture supprimée"
+        400:
+          description: "Mauvais ID fournit !"
+        404:
+          description: "Voiture non trouvée"
+        500:
+          description: "Erreur de NodeJS"
+      x-swagger-router-controller: "Car"
+definitions:
+  Car:
+    type: "object"
+    required:
+    - "idBrand"
+    - "name"
+    - "price"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 27
+      idBrand:
+        type: "integer"
+        format: "int64"
+        example: 3
+        description: "id de la marque de voiture"
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      name:
+        type: "string"
+        example: "Logan"
+      price:
+        type: "number"
+        format: "double"
+        example: 59.99
+      priceLongTime:
+        type: "number"
+        format: "double"
+        example: 29.99
+      year:
+        type: "integer"
+        format: "int32"
+        example: 2017
+      stock:
+        type: "integer"
+        format: "int32"
+        example: 9
+      desc:
+        type: "string"
+        example: "La meilleure voiture de sa catégorie !"
+      dirty:
+        type: "boolean"
+        example: true
+    example:
+      dirty: true
+      priceLongTime: 29.99
+      year: 2017
+      idBrand: 3
+      price: 59.99
+      name: "Logan"
+      id: 27
+      stock: 9
+      desc: "La meilleure voiture de sa catégorie !"
