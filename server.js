@@ -132,7 +132,7 @@ console.log('Server running on http://%s:%s', ip, port);
 module.exports = app ;
 
 // ************************************************************
-var server_port = 8081;
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8081;
 var server_ip_address = ip;
 
 var fs = require('fs'),
