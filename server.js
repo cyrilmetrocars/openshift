@@ -1,6 +1,3 @@
-var utils = require('../utils/writer.js');
-var Car = require('../service/CarService');
-
 //  OpenShift sample Node application
 var express = require('express'),
     app     = express(),
@@ -133,26 +130,20 @@ app.get('/all-cars/', function (req, res) {
   res.setHeader('Access-Control-Allow-Credentials','true');
 
   //reponse
-//  Car.getCars(idBrand,dirty)
-  Car.getCars()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
+  if (!db) {
+    initDb(function(err){console.log(err.message);});
+  }
+  if (db) {
+    var _carsCollection = db.collection('cars');
+
+    _carsCollection.find().toArray(function(err,cars){
+      var jsonCars = JSON.stringify(cars.map(function(car){delete car._id;return car;}));
+      response.writeHead(code, {'Content-Type': 'application/json'});
+      response.end(jsonCars);
     });
-
-  // if (!db) {
-  //   initDb(function(err){console.log(err.message);});
-  // }
-  // if (db) {
-  //   var cars = db.collection('cars');
-  //   var jsonCars = JSON.stringify(cars.map(function(car){delete car._id;return car;}));
-
-  //     res.render('readme.html', { pageCountMessage : count, dbInfo: dbDetails });
-  // } else {
-  //   res.render('readme.html', { pageCountMessage : null});
-  // }
+  } else {
+    res.render('index.html');
+  }
 });
 
 // error handling
