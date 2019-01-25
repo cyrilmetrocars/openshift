@@ -27,14 +27,14 @@ describe('Basic routes tests', function() {
         })
     });
 
-    // it('GET to /all-cars should return 200', function(done){
-    //     chai.request(reqServer)
-    //     .get('/all-cars')
-    //     .end(function(err, res) {
-    //         res.should.have.status(200);
-    //         done();
-    //     })
-    // });
+    it('GET to /all-cars should return 200', function(done){
+        chai.request(reqServer)
+        .get('/all-cars/')
+        .end(function(err, res) {
+            res.should.have.status(200);
+            done();
+        })
+    });
 
     // it('GET to /all-brands should return 200', function(done){
     //     chai.request(reqServer)
