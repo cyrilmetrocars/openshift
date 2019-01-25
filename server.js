@@ -138,11 +138,10 @@ app.get('/all-cars/', function (req, res) {
 
     _carsCollection.find().toArray(function(err,cars){
       var jsonCars = JSON.stringify(cars.map(function(car){delete car._id;return car;}));
-      response.writeHead(code, {'Content-Type': 'application/json'});
-      response.end(jsonCars);
+      res.end(jsonCars);
     });
   } else {
-    res.render('index.html');
+    res.end([]);
   }
 });
 
